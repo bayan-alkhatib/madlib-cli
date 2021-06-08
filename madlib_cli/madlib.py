@@ -37,7 +37,7 @@ parsed_script=parse_template()
 
 
 def merge():
-    return parsed_script[0].format(input_list)
+    return parsed_script[0].format(*input_list)
 
 merged_script=merge()
 
