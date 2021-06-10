@@ -1,10 +1,11 @@
 import re
 
-print(""" 
-Welcome to madlib game!
+def welcome_print():
+    print(""" 
+    Welcome to madlib game!
 
-all you need is to think of an example of the below vocabs 
-""")
+    all you need is to think of an example of the below vocabs 
+    """)
 
 vocabs_list=['Adjective','Adjective','A First Name','Past Tense Verb','A First Name','Adjective','Adjective',
 'Plural Noun','Large Animal','Small Animal',"A Girl's Nam",'Adjective','Plural Noun','Adjective','Plural Noun',
@@ -17,34 +18,35 @@ def input_vocabs():
         input_val=input('>> Enter %s  '%(vocabs_list[i]))
         input_list.append(input_val)
 
-input_vocabs()  
+
+if __name__== '__main__':
+    welcome_print()
+    input_vocabs() 
 
 
+def read_template(path):
+    try:
+        with open(path) as file:
+            read=file.read()
+            return read
+    except FileNotFoundError :
+        raise FileNotFoundError('The file not found')
+   
 
-def read_template():
-    with open('../assets/script.txt') as file:
-        return file.read()
-
-read_script=read_template()
-
-
-def parse_template():
+def parse_template(read_script):
     modified_script=re.sub('{[^}]+}','{}',read_script)
-    removed_str_parts=re.findall('{[^}]+}',read_script)
+    removed_str_parts=tuple(re.findall("{(.*?)}",read_script))
     return  modified_script, removed_str_parts
 
-parsed_script=parse_template()
 
-
-def merge():
-    return parsed_script[0].format(*input_list)
-
-merged_script=merge()
+def merge(parsed_script,user_input):
+    return parsed_script.format(*user_input)
 
 
 
-def copied_script():
-    with open('../assets/script_copy.txt', 'wb') as script_write:
+def script_copy(merged_script):
+    with open('./assets/script_copy.txt','wb') as script_write:
          return script_write.write(bytes(merged_script,'utf-8'))
 
-copied_script()
+
+
