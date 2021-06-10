@@ -18,7 +18,6 @@ def input_vocabs():
         input_val=input('>> Enter %s  '%(vocabs_list[i]))
         input_list.append(input_val)
 
-
 if __name__== '__main__':
     welcome_print()
     input_vocabs() 
@@ -48,4 +47,10 @@ def script_copy(merged_script):
          return script_write.write(bytes(merged_script,'utf-8'))
 
 
+
+def print_completed_script(merged_script):
+    print(merged_script)
+
+
+print_completed_script()
 
