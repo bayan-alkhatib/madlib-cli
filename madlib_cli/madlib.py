@@ -27,8 +27,7 @@ if __name__== '__main__':
 def read_template(path):
     try:
         with open(path) as file:
-            read=file.read()
-            return read
+            return file.read()
     except FileNotFoundError :
         raise FileNotFoundError('The file not found')
    
