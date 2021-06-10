@@ -19,10 +19,6 @@ def input_vocabs():
         input_list.append(input_val)
 
 
-if __name__== '__main__':
-    welcome_print()
-    input_vocabs() 
-
 
 def read_template(path):
     try:
@@ -32,15 +28,16 @@ def read_template(path):
         raise FileNotFoundError('The file not found')
    
 
+
 def parse_template(read_script):
     modified_script=re.sub('{[^}]+}','{}',read_script)
     removed_str_parts=tuple(re.findall("{(.*?)}",read_script))
     return  modified_script, removed_str_parts
 
 
+
 def merge(parsed_script,user_input):
     return parsed_script.format(*user_input)
-
 
 
 def script_copy(merged_script):
@@ -48,4 +45,16 @@ def script_copy(merged_script):
          return script_write.write(bytes(merged_script,'utf-8'))
 
 
+def print_completed_script(merged_script):
+    print(merged_script)
+
+
+if __name__== '__main__':
+    welcome_print()
+    input_vocabs() 
+    read_script=read_template('./assets/script.txt')
+    parsed_script=parse_template(read_script)[0]
+    merged_script=merge(parsed_script,input_list)
+    script_copy(merged_script)
+    print_completed_script(merged_script)
 
